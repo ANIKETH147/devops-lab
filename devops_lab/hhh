@@ -1,0 +1,66 @@
+9th program
+
+sudo yum update -y
+sudo yum install docker -y
+sudo service docker start
+sudo usermod -aG docker ec2-user
+
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+
+docker build -t myweb:v1 .
+
+docker run -d -p 80:80 myweb:v1
+_________________________________________________________________________________________________________________
+10th program
+
+aws ecr get-login-password --region add-your-region | docker login --username AWS --password-stdin your-repository-uri-without-/myweb
+
+docker tag myweb:v1 your-full-ecr-uri:latest
+
+docker push your-full-ecr-uri:latest
+
+____________________________________________________________________________________________________________________
+
+7th program
+
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+mkdir myapp
+cd myapp
+
+echo "<h1> DevOps Lab Program </h1>" > index.html
+
+aws configure
+
+aws s3 cp s3-bucket-uri .
+
+unzip myapp.zip
+
+cd myapp 
+
+sudo cp index.html /var/www/html/
+
+______________________________________________________________________________________________________
+
+8th program
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
+}
+
+
+
+
+
